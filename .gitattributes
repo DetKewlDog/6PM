@@ -3,5 +3,5 @@
 
 poetry.lock linguist-vendored
 pyproject.toml linguist-vendored
-venv linguist-vendored
-__pycache__ linguist-vendored 
+venv/* linguist-vendored
+__pycache__/* linguist-vendored 
