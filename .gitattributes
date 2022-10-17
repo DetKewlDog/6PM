@@ -1,2 +1,5 @@
 *.pyx linguist-vendored
 *.cpp linguist-vendored
+
+poetry.lock linguist-vendored
+pyproject.toml linguist-vendored
