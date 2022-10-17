@@ -1,4 +1,5 @@
 *.pyx linguist-vendored
+*.pyc linguist-vendored
 *.cpp linguist-vendored
 
 poetry.lock linguist-vendored
