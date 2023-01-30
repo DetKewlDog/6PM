@@ -28,8 +28,8 @@ def check_tuna(msg):
   return count >= 3
 
 
-def check_6am(msg):
-  return '6am' in msg or '6pm' in msg
+def check_named(msg):
+  return '6am' in msg or '6pm' in msg or 'bot' in msg
 
 
 def check_good_bot(msg):
