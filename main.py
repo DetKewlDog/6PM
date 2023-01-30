@@ -31,6 +31,7 @@ def check_tuna(msg):
 def check_named(msg):
   return '6am' in msg or '6pm' in msg or 'bot' in msg
 
+
 # Turner would yell at me for writing un-DRY code
 def check_good_bot(msg):
   for word in good_words:
@@ -39,17 +40,20 @@ def check_good_bot(msg):
 
   return False
 
+
 def check_bad_bot(msg):
   for word in bad_words:
     if word in msg:
       return True
   return False
 
+
 def check_neautral(msg):
   for word in neutral_words:
     if word in msg:
       return True
   return False
+
 
 def check_evil(msg):
   for word in evil_words:
@@ -127,7 +131,9 @@ async def on_message(message):
     current_time = datetime.now()
     difference = current_time - last_time
     if (difference.total_seconds() / 3600 >= 8):
-      await message.reply('<:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> WORK ON RED NIV <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816>')
+      await message.reply(
+        '<:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> WORK ON RED NIV <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816>'
+      )
     with open('cheetimer.txt', 'w') as f:
       f.write(str(int(current_time.timestamp())))
 
@@ -142,7 +148,7 @@ async def on_message(message):
 
     # If the message contains a word from the good list and the bad list, it is neutral
     if good_bot and bad_bot:
-      neautral = True
+      neutral = True
       # Do enums exist in python? That would be cleaner than these 4 booleans
       good_bot = False
       bad_bot = False
