@@ -31,13 +31,31 @@ def check_tuna(msg):
 def check_named(msg):
   return '6am' in msg or '6pm' in msg or 'bot' in msg
 
-
+# Turner would yell at me for writing un-DRY code
 def check_good_bot(msg):
-  return 'good 6am' in msg or 'good 6pm' in msg or 'good bot' in msg
+  for word in good_words:
+    if word in msg:
+      return True
 
+  return False
 
 def check_bad_bot(msg):
-  return 'bad 6am' in msg or 'bad 6pm' in msg or 'bad bot' in msg
+  for word in bad_words:
+    if word in msg:
+      return True
+  return False
+
+def check_neautral(msg):
+  for word in neutral_words:
+    if word in msg:
+      return True
+  return False
+
+def check_evil(msg):
+  for word in evil_words:
+    if word in msg:
+      return True
+  return False
 
 
 def find_occurence(s, pos, ch):
@@ -113,12 +131,31 @@ async def on_message(message):
     with open('cheetimer.txt', 'w') as f:
       f.write(str(int(current_time.timestamp())))
 
+  # If the message mentions the bot in any form, it will scan the word lists
+  # This is a slight optimisation to prevent the bot from checking every message
   if check_named(message.content.lower()):
-    if check_good_bot(message.content.lower()):
-      await message.add_reaction('❤')
+    # See if the message matches any of the words in the lists
+    good_bot = check_good_bot(message.content.lower())
+    bad_bot = check_bad_bot(message.content.lower())
+    neutral = check_neautral(message.content.lower())
+    evil = check_evil(message.content.lower())
 
-    if check_bad_bot(message.content.lower()):
+    # If the message contains a word from the good list and the bad list, it is neutral
+    if good_bot and bad_bot:
+      neautral = True
+      # Do enums exist in python? That would be cleaner than these 4 booleans
+      good_bot = False
+      bad_bot = False
+
+    # There is probably a better way to do this, but I am too lazy to figure it out
+    if good_bot:
+      await message.add_reaction('❤')
+    if bad_bot:
       await message.add_reaction('💔')
+    if neutral:
+      await message.add_reaction('❓')
+    if evil:
+      await message.add_reaction('😈')
 
   if message.content == '!stopfight':
     correct_the = False
@@ -181,6 +218,8 @@ try:
 except:
   os.system('kill 1')
 
+# Wordlists for the bot to check for
+# More obscure words are at the bottom (seperated by a newline)
 good_words = """
   attractive
   sexy
