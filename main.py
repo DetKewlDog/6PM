@@ -28,16 +28,34 @@ def check_tuna(msg):
   return count >= 3
 
 
-def check_6am(msg):
-  return '6am' in msg or '6pm' in msg
+def check_named(msg):
+  return '6am' in msg or '6pm' in msg or 'bot' in msg
 
-
+# Turner would yell at me for writing un-DRY code
 def check_good_bot(msg):
-  return 'good 6am' in msg or 'good 6pm' in msg or 'good bot' in msg
+  for word in good_words:
+    if word in msg:
+      return True
 
+  return False
 
 def check_bad_bot(msg):
-  return 'bad 6am' in msg or 'bad 6pm' in msg or 'bad bot' in msg
+  for word in bad_words:
+    if word in msg:
+      return True
+  return False
+
+def check_neautral(msg):
+  for word in neutral_words:
+    if word in msg:
+      return True
+  return False
+
+def check_evil(msg):
+  for word in evil_words:
+    if word in msg:
+      return True
+  return False
 
 
 def find_occurence(s, pos, ch):
@@ -113,11 +131,31 @@ async def on_message(message):
     with open('cheetimer.txt', 'w') as f:
       f.write(str(int(current_time.timestamp())))
 
-  if check_good_bot(message.content.lower()):
-    await message.add_reaction('❤')
+  # If the message mentions the bot in any form, it will scan the word lists
+  # This is a slight optimisation to prevent the bot from checking every message
+  if check_named(message.content.lower()):
+    # See if the message matches any of the words in the lists
+    good_bot = check_good_bot(message.content.lower())
+    bad_bot = check_bad_bot(message.content.lower())
+    neutral = check_neautral(message.content.lower())
+    evil = check_evil(message.content.lower())
 
-  if check_bad_bot(message.content.lower()):
-    await message.add_reaction('💔')
+    # If the message contains a word from the good list and the bad list, it is neutral
+    if good_bot and bad_bot:
+      neautral = True
+      # Do enums exist in python? That would be cleaner than these 4 booleans
+      good_bot = False
+      bad_bot = False
+
+    # There is probably a better way to do this, but I am too lazy to figure it out
+    if good_bot:
+      await message.add_reaction('❤')
+    if bad_bot:
+      await message.add_reaction('💔')
+    if neutral:
+      await message.add_reaction('❓')
+    if evil:
+      await message.add_reaction('😈')
 
   if message.content == '!stopfight':
     correct_the = False
@@ -179,3 +217,145 @@ try:
   client.run(os.getenv('TOKEN'))
 except:
   os.system('kill 1')
+
+# Wordlists for the bot to check for
+# More obscure words are at the bottom (seperated by a newline)
+good_words = """
+  attractive
+  sexy
+  good
+  pog
+  cool
+  nice
+  legendary
+  great
+  neat
+  best
+  brilliant
+  incredible 
+  fantastic
+  godly
+  lovely
+  pretty
+  perfect
+  neat
+  smart
+  super
+  sweet
+  wholesome
+  wise
+  swag
+  poggers
+
+  clever
+  conscious
+  cute
+  funny
+  fun
+  friendly
+  flattering
+  glorious
+  helpful
+  inspiring
+  intelligent
+  kind
+  marvellous
+  pleasant
+  polite
+  perceptive
+  patient
+  praiseworthy
+  rational
+  self-aware
+  sensational
+  sensible
+  sharp
+  strong
+  spectacular
+  stunning
+  superior
+  supportive
+  thoughtful
+  trustworthy
+  unparalleled
+  valuable
+  vigilant
+  well-mannered
+  wonderful
+  captivating
+  magnificent
+  breathtaking
+  splendid
+  stellar
+  epic
+""".split()
+
+neautral_words = """
+  special
+  drunk
+  faulty
+  confusing
+""".split()
+
+negative_words = """
+  bad
+  stupid
+  mean
+  dumb
+  cringe
+  weird
+  rude
+  lazy
+  foolish
+  cruel
+  awful
+  idiot
+
+  basic
+  bland
+  bizare
+  bloated
+  blind
+  bloody
+  blunt
+  boring
+  brainless
+  cancerous
+  mentally-challenged
+  cheap
+  childish
+  clueless
+  cocky
+  concerning
+  convoluted
+  corny
+  corrupt
+  cowardly
+  costly
+  crazy
+  daft
+  dangerous
+  defective
+  deformed
+  dense
+  dirty
+  disgusting
+  empty
+  faulty
+  idiotic
+  moody
+  nosy
+  petty
+  pitiful
+  tacky
+""".split()
+
+evil_words = """
+  coldhearted
+  cruel
+  controversial
+  creepy
+  evil
+  racist
+  toxic
+""".split()
