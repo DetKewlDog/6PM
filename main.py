@@ -113,11 +113,12 @@ async def on_message(message):
     with open('cheetimer.txt', 'w') as f:
       f.write(str(int(current_time.timestamp())))
 
-  if check_good_bot(message.content.lower()):
-    await message.add_reaction('❤')
+  if check_named(message.content.lower()):
+    if check_good_bot(message.content.lower()):
+      await message.add_reaction('❤')
 
-  if check_bad_bot(message.content.lower()):
-    await message.add_reaction('💔')
+    if check_bad_bot(message.content.lower()):
+      await message.add_reaction('💔')
 
   if message.content == '!stopfight':
     correct_the = False
@@ -179,3 +180,143 @@ try:
   client.run(os.getenv('TOKEN'))
 except:
   os.system('kill 1')
+
+good_words = """
+  attractive
+  sexy
+  good
+  pog
+  cool
+  nice
+  legendary
+  great
+  neat
+  best
+  brilliant
+  incredible 
+  fantastic
+  godly
+  lovely
+  pretty
+  perfect
+  neat
+  smart
+  super
+  sweet
+  wholesome
+  wise
+  swag
+  poggers
+
+  clever
+  conscious
+  cute
+  funny
+  fun
+  friendly
+  flattering
+  glorious
+  helpful
+  inspiring
+  intelligent
+  kind
+  marvellous
+  pleasant
+  polite
+  perceptive
+  patient
+  praiseworthy
+  rational
+  self-aware
+  sensational
+  sensible
+  sharp
+  strong
+  spectacular
+  stunning
+  superior
+  supportive
+  thoughtful
+  trustworthy
+  unparalleled
+  valuable
+  vigilant
+  well-mannered
+  wonderful
+  captivating
+  magnificent
+  breathtaking
+  splendid
+  stellar
+  epic
+""".split()
+
+neautral_words = """
+  special
+  drunk
+  faulty
+  confusing
+""".split()
+
+negative_words = """
+  bad
+  stupid
+  mean
+  dumb
+  cringe
+  weird
+  rude
+  lazy
+  foolish
+  cruel
+  awful
+  idiot
+
+  basic
+  bland
+  bizare
+  bloated
+  blind
+  bloody
+  blunt
+  boring
+  brainless
+  cancerous
+  mentally-challenged
+  cheap
+  childish
+  clueless
+  cocky
+  concerning
+  convoluted
+  corny
+  corrupt
+  cowardly
+  costly
+  crazy
+  daft
+  dangerous
+  defective
+  deformed
+  dense
+  dirty
+  disgusting
+  empty
+  faulty
+  idiotic
+  moody
+  nosy
+  petty
+  pitiful
+  tacky
+""".split()
+
+evil_words = """
+  coldhearted
+  cruel
+  controversial
+  creepy
+  evil
+  racist
+  toxic
+""".split()
