@@ -5,11 +5,13 @@ import keep_alive
 import asyncio
 import re
 import difflib
+from datetime import datetime
 
 ID_6AM = 368307072065863680
 ID_BOT = 1017048782904492122
 ID_RANDOM = 836379248595435580
 ID_DOG = 516976811981144065
+ID_CHEE = 535483016546615302
 
 intents = discord.Intents(messages=True, guilds=True)
 
@@ -84,7 +86,7 @@ correct_the = True
 
 @client.event
 async def on_message_edit(before, after):
-  if random.randint(0, 100) < 20:
+  if random.randint(0, 100) < 3:
     await before.reply(
       'https://tenor.com/view/edited-tf2-meet-the-medic-gif-22002258')
 
@@ -99,6 +101,17 @@ async def on_message(message):
   if message.author.id == ID_6AM:
     with open('db.txt', 'a') as f:
       f.write('\n' + message.content.replace('\n', '\\n'))
+
+  if message.author.id == ID_CHEE:
+    last_time = 0
+    with open('cheetimer.txt', 'r') as f:
+      last_time = datetime.fromtimestamp(int(f.read()))
+    current_time = datetime.now()
+    difference = current_time - last_time
+    if (difference.total_seconds() / 3600 >= 8):
+      await message.reply('<:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> WORK ON RED NIV <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816>')
+    with open('cheetimer.txt', 'w') as f:
+      f.write(str(int(current_time.timestamp())))
 
   if check_good_bot(message.content.lower()):
     await message.add_reaction('❤')
