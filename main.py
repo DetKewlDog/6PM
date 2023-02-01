@@ -33,26 +33,29 @@ def check_named(msg):
   return '6am' in msg or '6pm' in msg or 'bot' in msg
 
 
+
+
+
+
 def check_words(msg, words):
   msg = msg.replace('-', ' ')
   return any(word in msg for word in words)
 
 
-# Turner wouldn't yell at me for writing previously un-DRY code
-def check_good(msg):
-  return check_words(msg, good_words)
+REACTION_TYPES = {
+  '🍑': lambda mEsSaGe: "bottom" in mEsSaGe,
+  '❓': lambda mEsSaGe: check_words(mEsSaGe, neutral_words) or (check_words(mEsSaGe, good_words) and check_words(mEsSaGe, bad_words)),
+  '💔': lambda mEsSaGe: check_words(mEsSaGe, bad_words),
+  '❤': lambda mEsSaGe: check_words(mEsSaGe, good_words),
+  '😈': lambda mEsSaGe: check_words(mEsSaGe, evil_words),
+  '🦘': lambda mEsSaGe: check_words(mEsSaGe, aussie_words)
+}
 
 
-def check_bad(msg):
-  return check_words(msg, bad_words)
-
-
-def check_neutral(msg):
-  return check_words(msg, neutral_words)
-
-
-def check_evil(msg):
-  return check_words(msg, evil_words)
+def add_reaction(msg):
+  for emoji, should_react in REACTION_TYPES.items():
+    if should_react(msg.content.lower()):
+      msg.add_reaction(emoji)
 
 
 def find_occurence(s, pos, ch):
@@ -116,6 +119,8 @@ async def on_message(message):
   if message.author.id == ID_6AM:
     with open('db.txt', 'a') as f:
       f.write('\n' + message.content.replace('\n', '\\n'))
+  if message.author.name == "Oli":
+    return
 
   if message.author.id == ID_CHEE:
     last_time = 0
@@ -133,28 +138,8 @@ async def on_message(message):
   # If the message mentions the bot in any form, it will scan the word lists
   # This is a slight optimisation to prevent the bot from checking every message
   if check_named(message.content.lower()):
-    # See if the message matches any of the words in the lists
-    good = check_good(message.content.lower())
-    bad = check_bad(message.content.lower())
-    neutral = check_neutral(message.content.lower())
-    evil = check_evil(
-      message.content.lower()) and not good and not bad and not neutral
-    # If the message contains a word from the good list and the bad list, it is neutral
-    if good and bad:
-      neutral = True
-      # Do enums exist in python? That would be cleaner than these 4 booleans
-      good = bad = False
-
-    # There is probably a better way to do this, but I am too lazy to figure it out
-    if good:
-      await message.add_reaction('❤')
-    elif bad:
-      await message.add_reaction('💔')
-    elif neutral:
-      await message.add_reaction('❓')
-    elif evil:
-      await message.add_reaction('😈')
-
+    add_reaction(message)
+      
   if message.content == '!stopfight':
     correct_the = False
     await asyncio.sleep(10)

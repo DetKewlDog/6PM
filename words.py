@@ -1,6 +1,6 @@
 # Wordlists for the bot to check for
 # More obscure words are at the bottom (seperated by a newline)
-good_words = [
+good_words = set([
   'beautiful',
   'attractive',
   'sexy',
@@ -68,11 +68,11 @@ good_words = [
   'splendid',
   'stellar',
   'epic',
-]
+])
 
-neutral_words = ['special', 'drunk', 'faulty', 'confusing', 'goofy ahh']
+neutral_words = set(['special', 'drunk', 'faulty', 'confusing', 'goofy ahh'])
 
-bad_words = [
+bad_words = set([
   'bad', 'stupid', 'mean', 'dumb', 'cringe', 'weird', 'rude', 'lazy',
   'foolish', 'cruel', 'awful', 'idiot', 'ugly', 'basic', 'bland', 'bizare',
   'bloated', 'blind', 'bloody', 'blunt', 'boring', 'brainless', 'cancerous',
@@ -81,9 +81,14 @@ bad_words = [
   'crazy', 'daft', 'dangerous', 'defective', 'deformed', 'dense', 'dirty',
   'disgusting', 'empty', 'faulty', 'idiotic', 'moody', 'nosy', 'petty',
   'pitiful', 'tacky', 'ballsucking', 'imbecile'
-]
+])
 
-evil_words = [
+evil_words = set([
   'coldhearted', 'cruel', 'controversial', 'creepy', 'evil', 'racist', 'toxic',
   'sexist', 'sex offender', 'maleficent', 'despicable'
-]
+])
+
+aussie_words = set([
+  "mate", "bloke", "crikey", "wombat"
+])
+
