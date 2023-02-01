@@ -63,6 +63,7 @@ async def add_reaction(msg):
   for emoji, should_react in REACTION_TYPES.items():
     if should_react(msg.content.lower()):
       await msg.add_reaction(emoji)
+      break
 
 
 def find_occurence(s, pos, ch):
