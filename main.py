@@ -107,7 +107,7 @@ async def on_ready():
   print('We have logged in as {0.user}'.format(client))
 
 
-correct_the = True
+can_send_messages = True
 
 
 @client.event
@@ -119,7 +119,7 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_message(message):
-  global correct_the
+  global can_send_messages
   message = await message.channel.fetch_message(message.id)
 
   if message.author.id == ID_BOT:
@@ -147,9 +147,9 @@ async def on_message(message):
     await add_reaction(message)
 
   if message.content == '!stopfight':
-    correct_the = False
+    can_send_messages = False
     await asyncio.sleep(10)
-    correct_the = True
+    can_send_messages = True
 
   if message.content == '!fight':
     await message.reply(
@@ -168,7 +168,7 @@ async def on_message(message):
   if client.user in message.mentions:
     override = True
 
-  if (chance == 2 or override) and correct_the:
+  if (chance == 2 or override) and can_send_messages:
     with open('db.txt', 'r') as f:
       lst = f.readlines()
       resp = random.choice(lst)
