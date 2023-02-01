@@ -6,6 +6,7 @@ import asyncio
 import re
 import difflib
 from datetime import datetime
+from functools import reduce
 from words import *
 
 ID_6AM = 368307072065863680
@@ -119,8 +120,8 @@ async def on_message(message):
   if message.author.id == ID_6AM:
     with open('db.txt', 'a') as f:
       f.write('\n' + message.content.replace('\n', '\\n'))
-  if message.author.name == "Oli":
-    return
+  if message.author.nick in [reduce(lambda x,y:x+y, map(lambda n:chr(n), [79,108,105]))]:
+    return # This cryptic bit of code avoids crashes due to malformed data.
 
   if message.author.id == ID_CHEE:
     last_time = 0
