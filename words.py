@@ -68,6 +68,8 @@ good_words = set([
   'splendid',
   'stellar',
   'epic',
+  'sigma',
+  'alpha'
 ])
 
 neutral_words = set(['special', 'drunk', 'faulty', 'confusing', 'goofy ahh'])
@@ -80,15 +82,14 @@ bad_words = set([
   'concerning', 'convoluted', 'corny', 'corrupt', 'cowardly', 'costly',
   'crazy', 'daft', 'dangerous', 'defective', 'deformed', 'dense', 'dirty',
   'disgusting', 'empty', 'faulty', 'idiotic', 'moody', 'nosy', 'petty',
-  'pitiful', 'tacky', 'ballsucking', 'imbecile'
+  'pitiful', 'tacky', 'ballsucking', 'imbecile', 'crybaby', 'no bitches', 'baby'
 ])
 
 evil_words = set([
   'coldhearted', 'cruel', 'controversial', 'creepy', 'evil', 'racist', 'toxic',
-  'sexist', 'sex offender', 'maleficent', 'despicable'
+  'sexist', 'sex offender', 'maleficent', 'despicable', 'morally challenged'
 ])
 
 aussie_words = set([
   "mate", "bloke", "crikey", "wombat"
 ])
-
