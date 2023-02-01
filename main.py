@@ -160,7 +160,7 @@ async def on_message(message):
     await message.reply(get_every_tuna())
 
   chance = random.randrange(1, 350)
-  if message.author.id == ID_6AM:
+  if message.author.id == ID_6AM or message.author.id == ID_OLI:
     chance = random.randrange(1, 85)
 
   override = False
