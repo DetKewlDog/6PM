@@ -59,10 +59,10 @@ REACTION_TYPES = {
 }
 
 
-def add_reaction(msg):
+async def add_reaction(msg):
   for emoji, should_react in REACTION_TYPES.items():
     if should_react(msg.content.lower()):
-      msg.add_reaction(emoji)
+      await msg.add_reaction(emoji)
 
 
 def find_occurence(s, pos, ch):
@@ -143,7 +143,7 @@ async def on_message(message):
   # If the message mentions the bot in any form, it will scan the word lists
   # This is a slight optimisation to prevent the bot from checking every message
   if check_named(message.content.lower()):
-    add_reaction(message)
+    await add_reaction(message)
 
   if message.content == '!stopfight':
     correct_the = False
