@@ -34,12 +34,12 @@ def check_named(msg):
 
 
 
-
-
-
 def check_words(msg, words):
-  msg = msg.replace('-', ' ')
-  return any(word in msg for word in words)
+  for word in msg.split():
+    if word in words:
+      return True
+  return False
+
 
 
 REACTION_TYPES = {
