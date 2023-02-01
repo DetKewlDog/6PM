@@ -1,7 +1,6 @@
 # Wordlists for the bot to check for
 # More obscure words are at the bottom (seperated by a newline)
 good_words = set([
-<<<<<<< HEAD
   'beautiful', 'attractive', 'sexy', 'good', 'pog', 'cool', 'nice',
   'legendary', 'great', 'neat', 'best', 'brilliant', 'incredible ',
   'fantastic', 'godly', 'lovely', 'pretty', 'perfect', 'neat', 'smart',
