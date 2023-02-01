@@ -12,7 +12,6 @@ good_words = set([
   'superior', 'supportive', 'thoughtful', 'trustworthy', 'unparalleled',
   'valuable', 'vigilant', 'well mannered', 'wonderful', 'captivating',
   'magnificent', 'breathtaking', 'splendid', 'stellar', 'epic', 'sigma',
-=======
   'beautiful',
   'attractive',
   'sexy',
