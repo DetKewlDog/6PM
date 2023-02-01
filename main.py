@@ -34,14 +34,11 @@ def check_tuna(msg):
 def check_named(msg):
   return '6am' in msg or '6pm' in msg or 'bot' in msg
 
-
-
 def check_words(msg, words):
   for word in msg.split():
     if word in words:
       return True
   return False
-
 
 
 REACTION_TYPES = {
@@ -117,7 +114,7 @@ async def on_message(message):
 
   if message.author.id == ID_BOT:
     return
-  if message.author.id == ID_6AM:
+  if message.author.id == ID_6AM or message.author.id == ID_OLI:
     with open('db.txt', 'a') as f:
       f.write('\n' + message.content.replace('\n', '\\n'))
 
