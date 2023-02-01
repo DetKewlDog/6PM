@@ -120,8 +120,6 @@ async def on_message(message):
   if message.author.id == ID_6AM:
     with open('db.txt', 'a') as f:
       f.write('\n' + message.content.replace('\n', '\\n'))
-  if message.author.nick in [reduce(lambda x,y:x+y, map(lambda n:chr(n), [79,108,105]))]:
-    return # This cryptic bit of code avoids crashes due to malformed data.
 
   if message.author.id == ID_CHEE:
     last_time = 0
@@ -140,7 +138,10 @@ async def on_message(message):
   # This is a slight optimisation to prevent the bot from checking every message
   if check_named(message.content.lower()):
     add_reaction(message)
-      
+
+  if message.author.nick in [reduce(lambda x,y:x+y, map(lambda n:chr(n), [79,108,105]))]:
+    return # This cryptic bit of code avoids crashes due to malformed data.
+
   if message.content == '!stopfight':
     correct_the = False
     await asyncio.sleep(10)
