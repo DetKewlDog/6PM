@@ -34,7 +34,6 @@ def check_tuna(msg):
 def check_named(msg):
   return '6am' in msg or '6pm' in msg or 'bot' in msg
 
-
 def check_words(msg, words):
   for word in msg.split():
     if word in words:
@@ -43,21 +42,13 @@ def check_words(msg, words):
 
 
 REACTION_TYPES = {
-  '🍑':
-  lambda message: "bottom" in message,
-  '❓':
-  lambda message: check_words(message, neutral_words) or
-  (check_words(message, good_words) and check_words(message, bad_words)),
-  '💔':
-  lambda message: check_words(message, bad_words),
-  '❤':
-  lambda message: check_words(message, good_words),
-  '😈':
-  lambda message: check_words(message, evil_words),
-  '🦘':
-  lambda message: check_words(message, aussie_words)
+  '🍑': lambda message: "bottom" in message,
+  '❓': lambda message: check_words(message, neutral_words) or (check_words(message, good_words) and check_words(message, bad_words)),
+  '💔': lambda message: check_words(message, bad_words),
+  '❤': lambda message: check_words(message, good_words),
+  '😈': lambda message: check_words(message, evil_words),
+  '🦘': lambda message: check_words(message, aussie_words)
 }
-
 
 def add_reaction(msg):
   for emoji, should_react in REACTION_TYPES.items():
