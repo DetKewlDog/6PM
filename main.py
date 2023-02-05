@@ -14,7 +14,6 @@ ID_BOT = 1017048782904492122
 ID_RANDOM = 836379248595435580
 ID_DOG = 516976811981144065
 ID_CHEE = 535483016546615302
-ID_OLI = 698374767043936327
 
 intents = discord.Intents(messages=True, guilds=True)
 
@@ -173,7 +172,7 @@ async def on_message(message):
         await message.reply(get_every_tuna())
 
     chance = random.randrange(1, 350)
-    if message.author.id == ID_6AM or message.author.id == ID_OLI:
+    if message.author.id == ID_6AM:
         chance = random.randrange(1, 85)
 
     override = False
