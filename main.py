@@ -144,7 +144,7 @@ async def on_message(message):
             last_time = datetime.fromtimestamp(int(f.read()))
         current_time = datetime.now()
         difference = current_time - last_time
-        if difference.total_seconds() / 3600 >= 8:
+        if difference.total_seconds() / 3600 >= 6:
             await message.reply(
                 "<:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> WORK ON RED NIV <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816> <:holdinggun:1040138431759650816>"
             )
