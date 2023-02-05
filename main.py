@@ -135,7 +135,7 @@ async def on_message(message):
 
     if message.author.id == ID_BOT:
         return
-    if message.author.id == ID_6AM or message.author.id == ID_OLI:
+    if message.author.id == ID_6AM:
         with open("db.txt", "a") as f:
             f.write("\n" + message.content.replace("\n", "\\n"))
 
