@@ -123,9 +123,8 @@ can_send_messages = True
 
 @client.event
 async def on_message_edit(before, after):
-    if random.randint(0, 100) < 3:
-        await before.reply(
-            "https://tenor.com/view/edited-tf2-meet-the-medic-gif-22002258")
+    if random.randint(0, 100) < 2:
+        await before.reply(random.choice(edited_gifs))
 
 
 @client.event

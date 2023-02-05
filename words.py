@@ -36,3 +36,16 @@ evil_words = set([
 ])
 
 aussie_words = set(['mate', 'bloke', 'crikey', 'wombat', 'chur'])
+
+# --------------------------------------------------------------
+
+edited_gifs = set([
+    'https://tenor.com/view/edited-discord-message-big-chungus-fortnite-gif-23270842',
+    'https://tenor.com/view/discord-edited-message-edited-the-rock-gif-26394548',
+    'https://tenor.com/view/edited-discord-message-edited-gif-26405535',
+    'https://tenor.com/view/edited-tf2-meet-the-medic-gif-22002258',
+    'https://tenor.com/view/edited-meme-kumala-gif-25980848',
+    'https://tenor.com/view/tboi-the-binding-of-isaac-the-binding-of-gif-21326835',
+    'https://tenor.com/view/ayaan-kha-ayaan-khan-ayaanus-khan-ayaanus-gif-25237874',
+    'https://tenor.com/view/edited-avatar-avatar-sweep-avatar-movie-discord-gif-26695803'
+])
